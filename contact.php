@@ -2,7 +2,12 @@
 session_start();
 require_once('config/db.php');
 require_once('assets/php/header.php');
-require_once('assets/php/nav.php');
+if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
+    require_once('assets/php/nav-guest.php');
+}
+else {
+    require_once('assets/php/nav.php');
+}
 ?>
 
 <?php 
@@ -16,17 +21,17 @@ $restaurants = $conn->query($sql);
     </div>
 </div>
 <div id="contact-form">
-    <form method="post" id="contactId" action="contact-action.php">
-        <label for="fname">Keresztneve</label>
+    <form method="post" id="contactId" action="action/contact-action.php">
+        <label for="fname">Keresztneve<span style="color: #CF2608">*</span></label>
         <input type="text" id="fname" name="firstname" required placeholder="Keresztneve..">
 
-        <label for="lname">Vezetékneve</label>
+        <label for="lname">Vezetékneve<span style="color: #CF2608">*</span></label>
         <input type="text" id="lname" name="lastname" required placeholder="Vezetékneve..">
 
-        <label for="email">EMAIL</label>
+        <label for="email">EMAIL<span style="color: #CF2608">*</span></label>
         <input type="email" id="email" name="email" required placeholder="example@gmail.com">
 
-        <label for="question">Kérdés</label>
+        <label for="question">Kérdés<span style="color: #CF2608">*</span></label>
         <select id="question" name="question">
             <option selected disabled>Miben segíthetünk?</option>
             <?php
@@ -38,7 +43,7 @@ $restaurants = $conn->query($sql);
             ?>
         </select>
 
-        <label for="message">Üzenet</label>
+        <label for="message">Üzenet<span style="color: #CF2608">*</span></label>
         <textarea id="message" name="message" required placeholder="Irja le üzenetét.."></textarea>
 
         <input type="submit" value="Elküld" name="sb">

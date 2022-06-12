@@ -113,7 +113,28 @@ if ($action != "" AND in_array($action, $actions) AND strpos($referer, SITE) !==
             break;
 
         case "forget" :
-            // To do
+            if(isset($_POST['email'])) {
+                $email = mysqli_real_escape_string($connection, trim($_POST["email"]));
+            }
+
+            if (empty($email) OR !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                redirection('../login.php?f=8');
+            }
+
+            $sql = "SELECT id_user, username FROM users_web WHERE email = '".$email."'";
+            $result = mysqli_query($connection, $sql);
+            if (mysqli_num_rows($result) == 1) {
+                $record = mysqli_fetch_array($result);
+                $username = $record["username"];
+                $id = $record["id_user"];
+                $token = createCode(40);
+                insertToken($id, $token);
+                sendPasswordRecoveryEmail($username, $email, $token);
+                redirection('../login.php?f=12');
+            }
+            else {
+                redirection('../login.php?f=15');
+            }
             break;
 
         default:

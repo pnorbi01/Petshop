@@ -12,5 +12,5 @@ if (ini_get("session.use_cookies")) {
 
 session_destroy();
 
-header("Location:/petshop/petshop/login.php?l=5");
+header("Location:/petshop/petshop/index.php");
 exit();

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('config/db.php');
+require_once('../config/db.php');
 if(isset($_POST["modify"])) {
     if(isset($_POST["editFirstName"]) && !empty($_POST["editFirstName"]) && 
         isset($_POST["editEmail"]) && !empty($_POST["editEmail"]) &&
@@ -15,17 +15,17 @@ if(isset($_POST["modify"])) {
 
             if($conn->query($sql1)) {
                 $_SESSION["data-msg"] = "succ";
-                header("Location: edit-profile.php");
+                header("Location: ../edit-profile.php");
             }
             else {
                 $_SESSION["data-msg"] = "err";
-                header("Location: edit-profile.php");
+                header("Location: ../edit-profile.php");
             }
     }
     else {
         $_SESSION["data-msg"] = "err";
-        header("Location: edit-profile.php");
+        header("Location: ../edit-profile.php");
     }
-}
+} 
 
 ?>

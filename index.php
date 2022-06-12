@@ -3,11 +3,13 @@ session_start();
 require_once 'register/functions_def.php';
 require_once('register/config.php');
 require_once 'register/db_config.php';
-if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
-    redirection('login.php?l=0');
-}
 require_once('assets/php/header.php');
-require_once('assets/php/nav.php');
+if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
+    require_once('assets/php/nav-guest.php');
+}
+else {
+    require_once('assets/php/nav.php');
+}
 
 ?>
 <div id="container">
@@ -22,7 +24,7 @@ require_once('assets/php/nav.php');
 <div id="searcher-bg">
     <div id="searcher">
         <div class="search-container">
-            <form method="post" action="search.php">
+            <form method="get" action="search.php">
                 <input type="text" placeholder="Keresés.." name="search">
                 <button type="submit"><i class="fa fa-search" style="font-size: 15px"></i></button>
             </form>

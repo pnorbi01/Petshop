@@ -1,17 +1,23 @@
-window.addEventListener('load', init);
+var mybutton = document.getElementById("myBtn");
 
+window.onscroll = function() {
+    scrollFunction()
+};
 
-function init() {
-    document.getElementById('fl').addEventListener('click', function (e) {
-        let forgetForm = document.getElementById('forget');
-
-        if (forgetForm.style.display === "none") {
-            forgetForm.style.display = "block";
-        } else {
-            forgetForm.style.display = "none";
-        }
-
-        e.preventDefault();
-    });
-
+function scrollFunction() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        mybutton.style.transform = "scale(1)";
+    } else {
+        mybutton.style.transform = "scale(0)";
+    }
 }
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+window.addEventListener("load", function() {
+    const loader = document.querySelector(".loader");
+    loader.className += " hidden";
+});

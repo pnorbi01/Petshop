@@ -627,6 +627,7 @@ body {
 
 
 .card-content img {
+    border-radius: 8px;
     width: 60%;
     height: 20vh;
 }
@@ -878,6 +879,75 @@ body {
     text-transform: uppercase;
     padding: 5em 0;
 }
+
+    /* Forgot password */
+
+    #forgot-password {
+        width: 50%;
+    }
+
+    #forgot-password-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .forgot-password-main {
+        width: 50%;
+        padding: 15px;
+        background-color: rgba(204, 204, 204, .60);
+        border-radius: 15px;
+    }
+    
+    #forgot-password-form input[type=submit] {
+        text-transform: uppercase;
+        width: 100%;
+        color: #000;
+        background-color: #fff;
+        padding: 10px 80px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-weight: bold;
+        font-family: 'Oswald', sans-serif;
+        transition: background-color 1s ease-out 100ms
+    }
+    
+    #forgot-password-form input[type=submit]:hover {
+        color: #fff;
+        background-color: #000;
+        cursor: pointer;
+        transition: background-color 1s ease-out 100ms
+    }
+
+    #forgot-password-form input[type=password] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
+    
+    #forgot-password-form input {
+        font-family: inherit;
+    }
+    
+    #forgot-password-form i {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 3em;
+        color: #0355C0;
+    }
+    
+    #forgot-password-form label {
+        font-weight: bold;
+    }
 
     /* Login page */
 
@@ -1194,6 +1264,8 @@ body {
         background-color: #CF2608;
         color: #FFF;
     }
+
+
     /* Adopting page /form/ */
 
 #adopt {
@@ -1268,7 +1340,7 @@ body {
 }
 
 
-/* PROFIL SZERKESZTÉSE OLDAL */
+/* Edit profile */
 
 
 .edit-profile-title {
@@ -1394,269 +1466,20 @@ body {
     margin-top: 150px;
 }
 
+/* ALL AD */
 
-
-
-
-
-
-
-/* Responsive */
-
-@media only screen and (max-width: 1200px) {
-    body{
-        width: 100%;
-    }
-    #log-container{
-        height: 50vh;
-        display: block;
-    }
-    #sign-up{
-        margin-top: 10px;
-        width: 100%;
-    }
-    #sign-in{
-        margin-top: 10px;
-        width: 100%;
-    }
-
-}
-
-@media only screen and (max-width: 590px) {
-
-    .sign-in-main{
-        width: 80%;
-    }
-
-    .sign-up-main{
-        width: 80%;
-    }
-
-}
-
-@media only screen and (max-width: 1000px) {
-    .content{
-        padding-left: 40px;
-    }
-}
-
-@media only screen and (max-width: 650px) {
-    .content{
-        width: 50%;
-        padding-left: 0px;
-        padding-right: 80px;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ÉTEL TERMÉKEINK TESTE 
-
-#termek_ajanlatok {
-
-}
-.termekek {
-    margin: 1em auto;
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-.food_1{
-    margin: .2em .7em;
-
-}
-.image_food {
-    height: 150px;
-    width: 200px;
-    display: block;
-    margin: 0 auto;
-}
-.image_food_overlay {
-    text-align: center;
-}
-.food_title {
-    font-weight: bold;
-}
-.food_description {
-    font-size: 13px;
-}
-.food_price {
-    font-weight: bold;
-    font-size: 15px;
-}
-.food_button {
-    margin-top: 15px;
-}
-.food_button button {
-    padding: 5px 15px;
-    text-transform: uppercase;
-    font-family: 'Oswald', sans-serif;
-    color: black;
-    background-color: white;
-    border: 1px solid black;
-    font-weight: bold;
-    transition: background-color 1s ease-out 100ms
-}
-.food_button button:hover {
-    border: 1px solid black;
-    color: white;
-    background-color: black;
-    cursor: pointer;
-    transition: background-color 1s ease-out 100ms
-}
-
-
-/* MENÜK OLDAL TESTE 
-
-
-#menuink {
-    width: 100%;
-    height: 650px;
-    background-image: url("../img/dsadasd.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-}
-#menuink span {
-    font-size: 50px;
-    font-weight: bold;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    text-transform: uppercase;
-    padding: 3em 3em;
-}
-
-/* SALÁTÁK OLDAL TESTE 
-
-#salataink {
-    width: 100%;
-    height: 650px;
-    background-image: url("../img/salads.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-}
-#salataink span {
-    font-size: 50px;
-    font-weight: bold;
-    color: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    text-transform: uppercase;
-    padding: 3em 2em;
-}
-
-/* ÜDITŐK OLDAL TESTE
-
-#uditoink {
-    width: 100%;
-    height: 650px;
-    background-image: url("../img/drinks.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-}
-#uditoink span {
-    font-size: 50px;
-    font-weight: bold;
-    color: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    text-transform: uppercase;
-    padding: 3em 3em;
-}
-
-
-/*PIZZÁK OLDAL TESTE 
-
-#pizzaink {
-    width: 100%;
-    height: 650px;
-    background-image: url("../img/about.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-}
-#pizzaink span {
-    font-size: 50px;
-    font-weight: bold;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    text-transform: uppercase;
-    padding: 2em 3em;
-}
-
-
-
-
-
-
-/* MEKI RENDELES URLAP TESTE 
-
-#mekiRendeles_uralp {
-    width: 100%;
+.users-pets-title {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-#mekiRendeles_uralp .container {
-    width: 50%;
+.users-pets-title h3 {
+    color: #0355C0;
 }
 
-#mekiRendeles_uralp input[type=text], select, textarea, input[type=number], input[type=email] {
-    width: 25%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-}
-
-
-
-/* ADMIN FELÜLET 
-
-#products {
+#users-pets {
     min-height: 100vh;
     width: 100%;
     display: flex;
@@ -1665,58 +1488,188 @@ body {
     margin-top: 100px;
 }
 
-#products td {
+#users-pets td {
+    width: 150px;
+    text-align: center;
+}
+
+
+/* ADMIN */
+
+#users-admin td, #users-admin th, #ad-admin td, #ad-admin th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#users-admin table {
+    width: 80%;
+}
+  
+#users-admin tr:nth-child(even), #ad-admin tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+  
+#users-admin tr:hover, #ad-admin tr:hover {
+    background-color: #ddd;
+}
+  
+#users-admin th, #ad-admin th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #04AA6D;
+    color: #FFF;
+}
+
+.admin-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#users-admin {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+#users-admin td {
     width: 200px;
     text-align: center;
 }
 
-#products img {
+#users-admin img {
     width: 100px;
     height: 100px;
 }
 
-#products button[type=submit], button[type=reset] {
+#users-admin button[type=submit], button[type=reset] {
     padding: 5px 10px;
     margin-right: 5px;
-    border: 1px solid black;
+    border: 1px solid #000;
     font-weight: bold;
     font-family: 'Oswald', sans-serif;
     transition: background-color 1s ease-out 100ms
 }
 
-#products button[type=submit]:hover, button[type=reset]:hover {
-    color: white;
-    border: 1px solid black;
-    background-color: black;
+#users-admin button[type=submit]:hover, button[type=reset]:hover {
+    color: #FFF;
+    border: 1px solid #000;
     cursor: pointer;
     transition: background-color 1s ease-out 100ms
 }
 
-
-
-/* ÚJ TERMÉK 
-
-
-#adding-new_product {
+#ad-admin {
     min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#addPetDis {
+    padding: 5px 10px;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    color: #FFF;
+    border: 1px solid #000;
+    background-color: #808080;
+    opacity: 0.5;
+}
+
+#addPetDis {
+    cursor: not-allowed;
+}
+
+#ad-admin table {
+    width: 80%;
+}
+
+#ad-admin td {
+    text-align: center;
+}
+
+#ad-admin img {
+    width: 100px;
+    height: 100px;
+}
+
+#deletePet, #addPet {
+    padding: 5px 10px;
+    border: 1px solid #000;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    transition: background-color 1s ease-out 100ms
+}
+
+#deletePet:hover, #addPet:hover {
+    color: #FFF;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: background-color 1s ease-out 100ms;
+}
+
+#deletePet {
+    background-color: #CF2608;
+}
+
+#addPet {
+    background-color: #37C70C;
+}
+
+#takeAdmin {
+    background-color: #CF2608;
+}
+
+#giveAdmin {
+    background-color: #37C70C;
+}
+
+/* AD POST */
+
+#adding-new_pet h3 {
+    color: #0355C0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#adding-new_pet {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#adding-new_pet form {
+    padding: 30px;
+    background-color: rgba(204, 204, 204, .60);
+    border-radius: 15px;
+    width: 50%;
+    margin-bottom: 30px;
+}
+
+.add-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-title h1 {
     margin-top: 100px;
 }
 
-#adding-new_product form {
-    width: 40%;
-}
-
-#adding-new_product span {
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-}
-
-#adding-new_product input {
+#adding-new_pet input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -1726,29 +1679,79 @@ body {
     font-family: inherit;
 }
 
-#adding-new_product label {
+#adding-new_pet label {
     text-transform: uppercase;
     font-weight: bold;
 }
 
-#adding-new_product button {
+#adding-new_pet button {
     padding: 5px 10px;
     margin-right: 5px;
-    border: 1px solid black;
+    border: 1px solid #000;
     font-weight: bold;
     font-family: 'Oswald', sans-serif;
     transition: background-color 1s ease-out 100ms
 }
 
-#adding-new_product button:hover {
-    color: white;
-    border: 1px solid black;
-    background-color: black;
+#adding-new_pet button:hover {
+    color: #FFF;
+    border: 1px solid #000;
+    background-color: #000;
     cursor: pointer;
     transition: background-color 1s ease-out 100ms
 }
 
-*/
+.no-result {
+    min-height: 100vh;
+}
+
+.all-ad {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.modalButton .delete-pet-button {
+    color: #000;
+    border: 1px solid #CF2608;
+    background: #fff;
+    margin-top: 25px;
+    transition: background-color 0.5s ease-out 100ms;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+.modalButton .delete-pet-button:hover {
+    color: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    background-color: #CF2608;
+    cursor: pointer;
+    transition: background-color 0.5s ease-out 100ms;
+    border-radius: 10px;
+}
+
+.all-ad button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: 1px solid #000;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    transition: background-color 1s ease-out 100ms
+}
+
+.all-ad button:hover {
+    color: #FFF;
+    border: 1px solid #000;
+    background-color: #000;
+    cursor: pointer;
+    transition: background-color 1s ease-out 100ms
+}
+
 
 
 

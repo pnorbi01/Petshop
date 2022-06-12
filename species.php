@@ -1,8 +1,13 @@
 <?php 
 session_start();
 require_once('assets/php/header.php');
-require_once('assets/php/nav.php');
 require_once('config/db.php');
+if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
+    require_once('assets/php/nav-guest.php');
+}
+else {
+    require_once('assets/php/nav.php');
+}
 $animalId = $_GET["animalId"];
 ?>
 <div class="animal">

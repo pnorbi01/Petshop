@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('config/db.php');
+require_once('../config/db.php');
 if(isset($_POST["modifyPass"])) {
     if(isset($_POST["newPassword"]) && !empty($_POST["newPassword"]) && 
         isset($_POST["newPasswordConfirm"]) && !empty($_POST["newPasswordConfirm"]) &&
@@ -15,16 +15,16 @@ if(isset($_POST["modifyPass"])) {
 
             if($conn->query($sql1)) {
                 $_SESSION["pass-msg"] = "succ";
-                header("Location: edit-profile.php");
+                header("Location: ../edit-profile.php");
             }
             else {
                 $_SESSION["pass-msg"] = "err";
-                header("Location: edit-profile.php");
+                header("Location: ../edit-profile.php");
             }
     }
     else {
         $_SESSION["pass-msg"] = "err";
-        header("Location: edit-profile.php");
+        header("Location: ../edit-profile.php");
     }
 }
 

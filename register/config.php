@@ -20,5 +20,9 @@ $messages = [
     8 => 'Érvényetelen e-mail cím!',
     9 => 'Legalább 8 karakter hosszú legyen a jelszava!',
     10 => 'Valami hiba történt. Próbálja újra később!',
-    11 => 'Fiókja már aktiválva van!'
+    11 => 'Fiókja már aktiválva van!',
+    12 => 'Jelszó visszaállító email kiküldve!',
+    13 => 'Jelszó megváltoztatva!',
+    14 => 'A fiókod letiltásra került!',
+    15 => 'Nem létező e-mail cím!'
 ];

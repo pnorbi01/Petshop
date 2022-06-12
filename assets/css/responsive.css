@@ -1,0 +1,330 @@
+/* Login/Signup */
+
+@media only screen and (max-width: 1200px) {
+    body {
+        width: 100%;
+    }
+    #log-container {
+        min-height: 100vh;
+        display: block;
+    }
+    #sign-up {
+        margin-top: 60px;
+        width: 100%;
+    }
+    #sign-in {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 590px) {
+
+    .sign-in-main {
+        width: 80%;
+    }
+
+    .sign-up-main {
+        width: 80%;
+    }
+
+}
+
+@media only screen and (max-width: 1000px) {
+    .content {
+        padding-left: 40px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .content {
+        width: 50%;
+        padding-left: 0px;
+        padding-right: 80px;
+    }
+}
+
+/* Contact */
+
+@media only screen and (max-width: 700px) {
+    #contact-form input, select, textarea {
+        width: 100% !important;
+    }
+
+    #contact-form form {
+        width: 500px;
+    }
+}
+
+@media only screen and (max-width: 555px) {
+    #contact-form input, select, textarea {
+        width: 100% !important;
+    }
+
+    #contact-form form {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    #contact-form input, select, textarea {
+        width: 100% !important;
+    }
+
+    #contact-form form { 
+        width: 200px;
+    }
+}
+
+/* Adopt page */
+
+@media only screen and (max-width: 700px) {
+    #adopt input, select, textarea {
+        width: 100% !important;
+    }
+
+    #adopt form {
+        width: 500px;
+    }
+}
+
+@media only screen and (max-width: 555px) {
+    #adopt input, select, textarea { 
+        width: 100% !important;
+    }
+
+    #adopt form {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    #adopt input, select, textarea {
+        width: 100% !important;
+    }
+
+    #adopt form {
+        width: 200px;
+    }
+}
+
+/* About */ 
+
+@media only screen and (max-width: 300px){
+    .about-title span {
+        padding: 8em 3em;
+    }
+}
+
+/* Index */
+
+
+.navbar{
+    opacity: 1;
+    background: rgba(131, 128, 128, 0.5);
+}
+
+@media only screen and (max-width: 404px) {
+    .index-title h1 {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .about-content {
+        padding: 0;
+        font-size: 11px;
+    }
+
+    #pet-bg {
+        width: 100%;
+    }
+
+    .pet-content {
+        font-size: 13px;
+        padding: 0;
+    }
+
+    .contact-content {
+        padding:0;
+        margin-right: 5px;
+        font-size: 11px;
+    }
+
+    #contact-main {
+        background-image: none;
+        background: rgba(131, 128, 128, 0.5);
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .pet-content {
+        width: 100%;
+        padding: 0;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #pet-main {
+        width: 80%;
+    }
+
+    #about-main {
+        width: 80%;
+    }
+
+    #contact-main {
+        width: 80%;
+
+    }
+
+    .about-content {
+        width: 100%;
+        padding: 0;
+        justify-content: flex-start;
+        font-size: 15px;
+        margin-left: 5px;
+    }
+
+    .petadopt-logo {
+        font-size: 15px;
+    }
+
+    .about-content button {
+        margin-left: 60px;
+    }
+
+}
+
+@media only screen and (max-width: 400px) {
+    #pet-main {
+        background-image: none;
+        background: rgba(131, 128, 128, 0.5);
+    }
+
+    #myBtn {
+        display: none;
+    }
+
+    .about-content button {
+        margin-left: 5px;
+    }
+
+    #searcher-bg input {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .contact-content {
+        padding: 0;
+        margin-right: 4px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .about-content button {
+        padding: 5px 40px;
+        margin-left: 25px;
+    }
+
+    .pet-content button {
+        padding: 5px 40px;
+    }
+
+    #contact-main button {
+        padding: 5px 40px;
+    }
+
+    .contact-content {
+        font-size: 9px;
+        margin-right: 4px;
+    }
+
+    .content h1 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 830px) {
+    .animal {
+        margin-top: 150px;
+        margin-bottom: 150px;
+    }
+    .animal p {
+        font-size: 15px;
+    }
+
+    .animal-image img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .animal-container {
+        gap: 2em;
+        display: inline-block;
+    }
+}
+
+@media only screen and (max-width: 900px){
+    .card-content {
+        width: 40%;
+    }
+
+    .modal-content img {
+        display: none;
+    }
+
+    .leftSide {
+        display: none;
+        border: none;
+    }
+
+    .rightSide {
+        height: 90%;
+    }
+}
+
+@media only screen and (max-width: 610px){
+    .card-content {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 523px){
+    .card-content {
+        width: 55%;
+        height: 60%;
+    }
+
+    .modal-content {
+        height: 80%;
+    }
+}
+
+@media only screen and (max-width: 370px){
+    .card-content {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 320px){
+    .card-content {
+        width: 110%;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    #adding-new_pet form {
+        width: 70%;
+    }
+
+    .users-pets-title h1 {
+        text-align: center;
+    }
+}
+
+
+
+

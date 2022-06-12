@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once('config/db.php');
+if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
+    header("Location: login.php");
+}
 require_once('assets/php/header.php');
 require_once('assets/php/nav.php');
 ?>
@@ -21,7 +24,7 @@ $row = $result->fetch_assoc();
         <div id="edit-form">
             <div class="edit-main">
                 <i class="fa">&#xf044;</i>
-                <form method="post" id="editProfile" action="data-action.php">
+                <form method="post" id="editProfile" action="action/data-action.php">
                     <div style="display: flex; gap: 1em;">
                         <div style="width: 50%">
                             <label for="userName">FELHASZNÁLÓNÉV</label>
@@ -50,15 +53,15 @@ $row = $result->fetch_assoc();
                         }
                     ?>
                 </form>
-                <form method="post" id="editPassword" action="password-action.php">
+                <form method="post" id="editPassword" action="action/password-action.php">
                 <i class="fa">&#xf023;</i>
                     <div style="display: flex; gap: 1em;">
                         <div style="width: 50%">
-                            <label for="firstPassword">JELSZÓ</label>
+                            <label for="firstPassword">ÚJ JELSZÓ</label>
                             <input type="password" id="firstPassword" name="newPassword" required placeholder="Jelszó..">
                         </div>
                         <div style="width: 50%">
-                            <label for="secondPassword">JELSZÓ ISMÉT</label>
+                            <label for="secondPassword">ÚJ JELSZÓ ISMÉT</label>
                             <input type="password" id="secondPassword" name="newPasswordConfirm" required placeholder="Jelszó ismét..">
                         </div>
                     </div>

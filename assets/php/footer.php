@@ -74,4 +74,24 @@ footer li a:hover {
     gap: 1em;
 }
 
+@media only screen and (max-width: 480px) {
+    footer {
+        padding: 0;
+    }
+
+    .upper-footer .left {
+        margin-top: 10px;
+        gap: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .copyright {
+        text-align: center;
+    }
+}
+
 </style>

@@ -1,31 +1,102 @@
-<script type="text/javascript">
-    window.addEventListener("load", function (){
-       const loader = document.querySelector(".loader");
-       loader.className += " hidden";
-    });
-</script>
+<?php
+require_once('config/db.php');
+?>
 
-<button onclick="topFunction()" id="myBtn" title="Vissza a tetejére"><i style="font-size:24px" class="fa arrow-up">&#xf077;</i></button>
+<?php
+$sql = "SELECT * FROM users_web WHERE username = '".$_SESSION["username"]."'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+?>
 
-<script>
-var mybutton = document.getElementById("myBtn");
+<nav class="navbar">
+    <div class="dropdown">
+        <span style="cursor:pointer;">Menü</span>
+        <div class="dropdown-content">
+            <a href="index.php">Kezdőlap</a><br>
+            <a href="contact.php">Kapcsolat</a><br>
+            <a href="animals.php">Kiskedvencek</a><br>
+            <a href="about.php">Rólunk</a><br>
+            <?php
+            if($row["level"] == 2) {
+            ?>
+            <li><a href="ad-posting.php">Hírdetés feladás</a></li>
+            <li class="admin-console-nav"><a href="admin-console.php">Adminpult</a></li>
+            <?php
+            }
+            else if($row["level"] <= 1){ ?>
+            <li><a href="ad-posting.php">Hírdetés feladás</a></li>
+            <?php
+            }
+            ?>
+            <a href="register/logout.php">Kijelentkezés</a><br><br><br>
+            <div>
+            <?php
+            if($row["level"] == 2) {
+            ?>
+            <span style="margin-right: 15px; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: bolder; font-size: 15px">Üdv,
+            <a style="color: #0355C0;" href="edit-profile.php"><?= $_SESSION['username'] ?></a><i class="material-icons"
+                title="Admin" style="font-size: 17px">&#xe8e8;</i></span>
+            <a href="index.php" class="logo"><i style='font-size:24px' class='fas'>&#xf1b0;</i>Petadopt</a>
+            <?php
+            }
+            else { ?>
+            <span style="margin-right: 15px; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: bolder; font-size: 15px">Üdv,
+            <a style="color: #0355C0;" href="edit-profile.php"><?= $_SESSION['username'] ?></a></span>
+            <a href="index.php" class="logo"><i style='font-size:24px' class='fas'>&#xf1b0;</i>Petadopt</a>
+            <?php 
+            }
+            ?>
+        </div>
+    </div>
+</div>
+</nav>
 
-window.onscroll = function() {scrollFunction()};
 
-function scrollFunction() {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-    mybutton.style.transform = "scale(1)";
-  } else {
-    mybutton.style.transform = "scale(0)";
-  }
-}
+<nav>
+    <ul>
+        <li><a class="text" href="index.php">Kezdőlap</a></li>
+        <li><a class="text" href="contact.php">Kapcsolat</a></li>
+        <li><a class="text" href="animals.php">Állataink</a></li>
+        <li><a class="text" href="favorites.php">Kedvencek</a></li>
+        <li><a class="text" href="about.php">Rólunk</a></li>
+        <?php
+        if($row["level"] == 2) {
+        ?>
+        <li><a class="text" href="ad-posting.php">Hírdetés feladás</a></li>
+        <li class="text" class="admin-console-nav"><a href="admin-console.php">Adminpult</a></li>
+        <?php
+        }
+        else if($row["level"] <= 1){ ?>
+        <li><a class="text" href="ad-posting.php">Hírdetés feladás</a></li>
+        <?php
+        }
+        ?>
+        <li><a class="text" href="register/logout.php">Kijelentkezés</a></li>
+    </ul>
+    <div>
+        <?php
+        if($row["level"] == 2) {
+        ?>
+        <span class="text" style="margin-right: 15px; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: bolder; font-size: 15px">Üdv,
+            <a class="text" style="color: #0355C0;" href="edit-profile.php"><?= $_SESSION['username'] ?></a><i class="material-icons"
+                title="Admin" style="font-size: 17px">&#xe8e8;</i></span>
+        <a href="index.php" class="logo"><i style='font-size:24px' class='fas'>&#xf1b0;</i>Petadopt</a>
+        <?php
+        }
+        else { ?>
+        <span class="text" style="margin-right: 15px; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: bolder; font-size: 15px">Üdv,
+            <a class="text" style="color: #0355C0;" href="edit-profile.php"><?= $_SESSION['username'] ?></a></span>
+        <a href="index.php" class="logo"><i style='font-size:24px' class='fas'>&#xf1b0;</i>Petadopt</a>
+        <?php 
+        }
+        ?>
+    </div>
+</nav>
 
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
+<button onclick="topFunction()" id="myBtn" title="Vissza a tetejére"><i style="font-size:24px"
+        class="fa arrow-up">&#xf077;</i></button>
 
-</script>
+<script src="register/js/script.js"></script>
 
 <div id="social-media-logos">
     <a href="https://facebook.com" class="fa fa-facebook" title="Facebook"></a>
@@ -39,23 +110,8 @@ function topFunction() {
     <img src="assets/img/downloading.gif">
 </div>
 
-<nav>
-    <ul>
-    <li><a href="index.php">Kezdőlap</a></li>
-        <li><a href="contact.php">Kapcsolat</a></li>
-        <li><a href="animals.php">Kiskedvencek</a></li>
-        <li><a href="about.php">Rólunk</a></li>
-        <li><a href="register/logout.php">Kijelentkezés</a></li>
-    </ul>
-    <div>
-        <span style="margin-right: 15px; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: bolder; font-size: 15px" >Üdv, <a style="color: #0355C0;" href="edit-profile.php"><?= $_SESSION['username'] ?></a></span>
-        <a href="index.php" class="logo"><i style='font-size:24px' class='fas'>&#xf1b0;</i>Petadopt</a>
-    </div>
-</nav>
-
 
 <style>
-
 nav {
     position: fixed;
     top: 0;
@@ -70,8 +126,7 @@ nav {
     background: rgba(255, 255, 255, .5);
 }
 
-nav ul,
-nav li {
+nav ul, nav li {
     margin: 0;
     padding: 0;
 }
@@ -122,12 +177,12 @@ nav a:hover {
 }
 
 @keyframes fadeOut {
-    100%{
+    100% {
         opacity: 0;
         visibility: hidden;
     }
 
-} 
+}
 
 #social-media-logos {
     display: flex;
@@ -140,7 +195,6 @@ nav a:hover {
     outline: none;
     cursor: pointer;
     transition: 1s ease-out 100ms;
-    transform: scale(1);
 }
 
 #social-media-logos .fa {
@@ -149,36 +203,94 @@ nav a:hover {
     width: 40px;
     text-align: center;
     text-decoration: none;
-  }
-  
-  #social-media-logos .fa:hover {
-      opacity: 0.7;
-  }
-  
-  #social-media-logos .fa-facebook {
+}
+
+#social-media-logos .fa:hover {
+    opacity: 0.7;
+}
+
+#social-media-logos .fa-facebook {
     background: #3B5998;
     color: #fff;
-  }
-  
-  #social-media-logos .fa-twitter {
+}
+
+#social-media-logos .fa-twitter {
     background: #55ACEE;
     color: #fff;
-  }
-  
-  #social-media-logos .fa-linkedin {
+}
+
+#social-media-logos .fa-linkedin {
     background: #007bb5;
     color: #fff;
-  }
-  
-  #social-media-logos .fa-youtube {
+}
+
+#social-media-logos .fa-youtube {
     background: #bb0000;
     color: #fff;
-  }
-  
-  #social-media-logos .fa-instagram {
+}
+
+#social-media-logos .fa-instagram {
     background: #125688;
     color: #fff;
-  }
+}
 
 
+.dropdown {
+    position: relative;
+    display: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+@media only screen and (max-width: 1000px) {
+    #social-media-logos {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 710px) {
+    .dropdown {
+      display: inline-block;
+    }
+
+    .text {
+      display: none;
+    }
+
+    .logo123 .logo {
+      display: none;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .admin-console-nav {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 710px) {
+    .dropdown {
+        display: inline-block;
+    }
+
+    .text {
+        display: none;
+    }
+
+    .logo123 .name {
+        display: none;
+    }
+}
 </style>

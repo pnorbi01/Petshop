@@ -141,8 +141,10 @@ function sendData($username, $email, $token)
     $header .= "Reply-To:support@petadopt.rs\r\n";
     $header .= "Content-Type: text/html; charset=UTF-8\n";
 
+    $url = SITE."register/active.php?token=$token";
+
     $message = "Data:\n\n user: $username \n \n www.vts.su.ac.rs";
-    $message .= "\n\n to activate your account click on the link: " . SITE . "register/active.php?token=$token";
+    $message .= "\n\n to activate your account click on <a href='".$url."'>this</a> link to finalize your registration.";
     $to = $email;
     $subject = "Registration at PetAdopt";
     return mail($to, $subject, $message, $header);
@@ -163,4 +165,35 @@ function addEmailFailure($id_user_web)
 
     $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 
+}
+
+function insertToken($id, $token) {
+    global $connection;
+    $sql = "INSERT INTO forgotpw VALUES ('$id', '$token')";
+    $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
+}
+
+function sendPasswordRecoveryEmail($username, $email, $token)
+{
+
+    $header = "From: PetAdopt <petadopt@petadopt.rs>\n";
+    $header .= "X-Sender: petadopt@petadopt.rs\n";
+    $header .= "X-Mailer: PHP/" . phpversion();
+    $header .= "X-Priority: 1\n";
+    $header .= "Reply-To:support@petadopt.rs\r\n";
+    $header .= "Content-Type: text/html; charset=UTF-8\n";
+
+    $url = SITE . "reset-password.php?token=$token";
+
+    $message = "Dear ".$username.",<br>Click on <a href='".$url."'>this</a> link to reset your password." ;
+    $to = $email;
+    $subject = "Forgotten password";
+    return mail($to, $subject, $message, $header);
+}
+
+function deleteToken($token) {
+    global $connection;
+
+    $sql = "DELETE FROM forgotpw WHERE token = '".$token."'";
+    $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 }

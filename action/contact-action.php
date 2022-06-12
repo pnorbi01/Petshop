@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('config/db.php');
+require_once('../config/db.php');
 if(isset($_POST["sb"])) {
                 if(isset($_POST["firstname"]) && !empty($_POST["firstname"]) && 
                     isset($_POST["lastname"]) && !empty($_POST["lastname"]) &&
@@ -19,16 +19,16 @@ if(isset($_POST["sb"])) {
 
             if ($conn->query($sql1) === TRUE) {
                 $_SESSION["contact-msg"] = "succ";
-                header("Location: contact.php");
+                header("Location: ../contact.php");
             } 
             else {
                 $_SESSION["contact-msg"] = "err";
-                header("Location: contact.php");
+                header("Location: ../contact.php");
             }
         }
         else {
             $_SESSION["contact-msg"] = "err";
-            header("Location: contact.php");
+            header("Location: ../contact.php");
         }
-    }
+}
 ?>

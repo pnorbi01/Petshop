@@ -1,12 +1,28 @@
 <?php 
 session_start();
 require_once('assets/php/header.php');
-require_once('assets/php/nav.php');
 require_once('config/db.php');
+if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
+    require_once('assets/php/nav-guest.php');
+    $loggedin = false;
+}
+else {
+    require_once('assets/php/nav.php');
+    $loggedin = true;
+}
 
-if(isset($_POST["search"]) && !empty($_POST["search"])) {
-    $search = "%".$_POST["search"]."%";
-    $sql = "SELECT pets.id, species.name as specie, pets.description, pets.image, pets.name, pets.gender, pets.age, pets.action, animals.id as animalId FROM pets, species, animals where (species.name like '$search' and species.id = pets.specieId and animals.id = species.animalId) or (pets.name like '$search' and pets.specieId = species.id and animals.id = species.animalId)";
+if($loggedin) {
+    $favoritesResult = $conn->query("SELECT pet_id FROM favourites WHERE user_id = ".$_SESSION["id_user"]);
+    $ids_array = [];
+    while($row = $favoritesResult->fetch_assoc())
+    {
+        $ids_array[] = $row['pet_id'];
+    }
+}
+
+if(isset($_GET["search"]) && !empty($_GET["search"])) {
+    $search = "%".$_GET["search"]."%";
+    $sql = "SELECT pets.id, species.name as specie, pets.description, pets.image, pets.name, pets.gender, pets.age, pets.adopted, animals.id as animalId, pets.active FROM pets, species, animals where (species.name like '$search' and species.id = pets.specieId and animals.id = species.animalId and pets.active = 1) or (pets.name like '$search' and pets.specieId = species.id and animals.id = species.animalId and pets.active = 1)";
     $result = $conn->query($sql);
 
     ?>
@@ -22,11 +38,26 @@ if(isset($_POST["search"]) && !empty($_POST["search"])) {
             <span class="pet-specie"><?= $row["specie"] ?></span>
             <span class="pet-description"><?= $row["description"] ?></span>
             <?php
-            if($row["action"] == 1) {
+            if($row["adopted"] == 1) {
             ?>
             <button type="button" onclick="openModal(<?= $row['id'] ?>)" class="infoButton">Részletek</button>
-            <button onclick="toggleHeart(event)"><i class="fas fa-heart" style="font-size: 20px"></i></button>
-            <?php
+            <?php 
+                    if($loggedin && in_array($row["id"], $ids_array)) {
+                ?>
+                <form method="post" action="action/unfav-action.php">
+                    <input type="text" hidden value="<?= $row["id"] ?>" name="favourite">
+                    <input type="text" hidden value="<?= $_SERVER["REQUEST_URI"] ?>" name="url">
+                    <button name="fav"><i class="fas fa-heart"
+                        style="font-size: 20px; color: #0355C0;"></i></button>
+                        </form>
+                        <?php } else if ($loggedin) { ?>
+                            <form method="post" action="action/fav-action.php">
+                    <input type="text" hidden value="<?= $row["id"] ?>" name="favourite">
+                    <input type="text" hidden value="<?= $_SERVER["REQUEST_URI"] ?>" name="url">
+                    <button name="fav"><i class="fas fa-heart"
+                        style="font-size: 20px; color: red;"></i></button>
+                        </form>
+                        <?php }
             }
             else {
                 ?>
@@ -54,8 +85,15 @@ if(isset($_POST["search"]) && !empty($_POST["search"])) {
                     <span class="modalTitle">Leírás</span>
                     <span><?= $row["description"] ?></span>
                     <div class="modalButton">
-                        <a href="adopt.php?animalId=<?= $row["animalId"] ?>&petId=<?= $row["id"] ?>"><button
-                                type="submit" value="Submit" class="adoptButton">Örökbefogadás</button></a>
+                    <?php 
+                        if($loggedin) { ?>
+                            <a href="adopt.php?animalId=<?= $row["animalId"] ?>&petId=<?= $row["id"] ?>"><button type="submit"
+                                    value="Submit" class="adoptButton">Örökbefogadás</button></a>
+                        <?php } else { ?>
+                            <a href="login.php"><button type="submit"
+                                    value="Submit" class="adoptButton">Örökbefogadás</button></a>
+                                    <?php
+                        } ?>
                     </div>
                 </div>
                 <div class="close1" onclick="closeModal(event)">+</div>
