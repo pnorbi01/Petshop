@@ -19,16 +19,16 @@ if(isset($_POST["sb"])) {
 
             if ($conn->query($sql1) === TRUE) {
                 $_SESSION["contact-msg"] = "succ";
-                header("Location: ../contact.php");
+                redirection(SITE."contact.php");
             } 
             else {
                 $_SESSION["contact-msg"] = "err";
-                header("Location: ../contact.php");
+                redirection(SITE."contact.php");
             }
         }
         else {
             $_SESSION["contact-msg"] = "err";
-            header("Location: ../contact.php");
+            redirection(SITE."contact.php");
         }
 }
 ?>

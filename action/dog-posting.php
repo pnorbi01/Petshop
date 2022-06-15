@@ -1,7 +1,10 @@
 <?php
 session_start();
 require_once('../config/db.php');
-if(isset($_POST["sbDog"])) {
+require_once('../register/config.php');
+require_once('../register/functions_def.php');
+
+if(isset($_POST["sbDog"]) && isAuthenticated()) {
     if(isset($_POST["image"]) && !empty($_POST["image"]) && 
         isset($_POST["name"]) && !empty($_POST["name"]) &&
         isset($_POST["description"]) && !empty($_POST["description"]) &&
@@ -22,17 +25,20 @@ if(isset($_POST["sbDog"])) {
 
             if($conn->query($sql1) === TRUE) {
                 $_SESSION["adDog-msg"] = "succ";
-                header("Location: ../ad-posting.php");
+                redirection(SITE."ad-posting.php");
             }
             else {
                 $_SESSION["adDog-msg"] = "err";
-                header("Location: ../ad-posting.php");
+                redirection(SITE."ad-posting.php");
             }
 
     }
     else {
         $_SESSION["adDog-msg"] = "err";
-        header("Location: ../ad-posting.php");
+        redirection(SITE."ad-posting.php");
     }
+}
+else {
+    redirection(SITE."login.php");
 }
 ?>

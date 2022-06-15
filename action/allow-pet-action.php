@@ -1,7 +1,10 @@
 <?php
 session_start();
 require_once('../config/db.php');
-if(isset($_POST["addPet"])) {
+require_once('../register/config.php');
+require_once('../register/functions_def.php');
+
+if(isset($_POST["addPet"]) && isAdmin($_SESSION["id_user"])) {
 
             $id = $_POST["allowPet"];
 
@@ -9,10 +12,13 @@ if(isset($_POST["addPet"])) {
             
 
             if($conn->query($sql1)) {
-                header("Location: ../admin-console.php");
+                redirection(SITE."admin-console.php");
             }
             else {
                 echo "Sikertelen";
             }      
+} 
+else {
+    redirection(SITE."index.php");
 }
 ?>

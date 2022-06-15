@@ -1,7 +1,10 @@
 <?php
 session_start();
 require_once('../config/db.php');
-if(isset($_POST["sbCat"])) {
+require_once('../register/config.php');
+require_once('../register/functions_def.php');
+
+if(isset($_POST["sbCat"]) && isAuthenticated()) {
     if(isset($_POST["image"]) && !empty($_POST["image"]) && 
         isset($_POST["name"]) && !empty($_POST["name"]) &&
         isset($_POST["description"]) && !empty($_POST["description"]) &&
@@ -22,17 +25,19 @@ if(isset($_POST["sbCat"])) {
 
             if($conn->query($sql1) === TRUE) {
                 $_SESSION["adCat-msg"] = "succ";
-                header("Location: ../ad-posting.php");
+                redirection(SITE."ad-posting.php");
             }
             else {
                 $_SESSION["adCat-msg"] = "err";
-                header("Location: ../ad-posting.php");
+                redirection(SITE."ad-posting.php");
             }
 
     }
     else {
         $_SESSION["adCat-msg"] = "err";
-        header("Location: ../ad-posting.php");
+        redirection(SITE."ad-posting.php");
     }
+} else {
+    redirection(SITE."login.php");
 }
 ?>

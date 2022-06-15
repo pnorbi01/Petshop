@@ -1,7 +1,10 @@
 <?php
 session_start();
 require_once('../config/db.php');
-if(isset($_POST["fav"])) {
+require_once('../register/config.php');
+require_once('../register/functions_def.php');
+
+if(isset($_POST["fav"]) && isAuthenticated()) {
 
             $user = $_SESSION["id_user"];
             $id = $_POST["favourite"];
@@ -16,4 +19,8 @@ if(isset($_POST["fav"])) {
                 echo "Sikertelen";
             }
 } 
+else {
+    redirection(SITE."login.php");
+}
+
 ?>

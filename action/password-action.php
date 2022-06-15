@@ -1,7 +1,10 @@
 <?php
 session_start();
 require_once('../config/db.php');
-if(isset($_POST["modifyPass"])) {
+require_once('../register/config.php');
+require_once('../register/functions_def.php');
+
+if(isset($_POST["modifyPass"]) && isAuthenticated()) {
     if(isset($_POST["newPassword"]) && !empty($_POST["newPassword"]) && 
         isset($_POST["newPasswordConfirm"]) && !empty($_POST["newPasswordConfirm"]) &&
         $_POST["newPassword"] === $_POST["newPasswordConfirm"]) {
@@ -15,17 +18,20 @@ if(isset($_POST["modifyPass"])) {
 
             if($conn->query($sql1)) {
                 $_SESSION["pass-msg"] = "succ";
-                header("Location: ../edit-profile.php");
+                redirection(SITE."edit-profile.php");
             }
             else {
                 $_SESSION["pass-msg"] = "err";
-                header("Location: ../edit-profile.php");
+                redirection(SITE."edit-profile.php");
             }
     }
     else {
         $_SESSION["pass-msg"] = "err";
-        header("Location: ../edit-profile.php");
+        redirection(SITE."edit-profile.php");
     }
+}
+else {
+    redirection(SITE."login.php");
 }
 
 ?>

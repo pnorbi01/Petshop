@@ -1,7 +1,10 @@
 <?php
 session_start();
 require_once('../config/db.php');
-if(isset($_POST["modify"])) {
+require_once('../register/config.php');
+require_once('../register/functions_def.php');
+
+if(isset($_POST["modify"]) && isAuthenticated()) {
     if(isset($_POST["editFirstName"]) && !empty($_POST["editFirstName"]) && 
         isset($_POST["editEmail"]) && !empty($_POST["editEmail"]) &&
         isset($_POST["editLastName"]) && !empty($_POST["editLastName"])) {
@@ -15,17 +18,20 @@ if(isset($_POST["modify"])) {
 
             if($conn->query($sql1)) {
                 $_SESSION["data-msg"] = "succ";
-                header("Location: ../edit-profile.php");
+                redirection(SITE."edit-profile.php");
             }
             else {
                 $_SESSION["data-msg"] = "err";
-                header("Location: ../edit-profile.php");
+                redirection(SITE."edit-profile.php");
             }
     }
     else {
         $_SESSION["data-msg"] = "err";
-        header("Location: ../edit-profile.php");
+        redirection(SITE."edit-profile.php");
     }
 } 
+else {
+    redirection(SITE."login.php");
+}
 
 ?>

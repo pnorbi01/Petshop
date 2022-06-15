@@ -1,7 +1,10 @@
 <?php
 session_start();
 require_once('../config/db.php');
-if(isset($_POST["give"])) {
+require_once('../register/config.php');
+require_once('../register/functions_def.php');
+
+if(isset($_POST["give"]) && isAdmin($_SESSION["id_user"])) {
 
             $user = $_SESSION["id_user"];
             $id = $_POST["giveAdmin"];
@@ -10,10 +13,13 @@ if(isset($_POST["give"])) {
             
 
             if($conn->query($sql1)) {
-                header("Location: ../admin-console.php");
+                redirection(SITE."admin-console.php");
             }
             else {
-                header("Location: ../admin-console.php");
+                redirection(SITE."admin-console.php");
             }
+}
+else {
+    redirection(SITE."index.php");
 }
 ?>
