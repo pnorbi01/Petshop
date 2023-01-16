@@ -12,6 +12,9 @@ function redirection($url)
     exit();
 }
 
+function isAuthenticated() {
+    return isset($_SESSION['username']) && isset($_SESSION['id_user']) && is_int($_SESSION['id_user']);
+}
 
 /**
  * Function checks that login parameters exists in users_web table
@@ -24,9 +27,8 @@ function checkUserLogin($username, $enteredPassword)
 {
     global $connection;
 
-    $sql = "SELECT id_user, password FROM users_web 
-            WHERE username = '$username'
-            AND active=1 LIMIT 0,1";
+    $sql = "SELECT id_user, password, active FROM users_web 
+            WHERE username = '$username' LIMIT 0,1";
 
     $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 
@@ -34,6 +36,9 @@ function checkUserLogin($username, $enteredPassword)
 
     if (mysqli_num_rows($result) > 0) {
         while ($record = mysqli_fetch_array($result)) {
+            if($record["active"] != 1) {
+                redirection(SITE."login.php?l=14");
+            }
             $data['id_user'] = (int)$record['id_user'];
             $registeredPassword = $record['password'];
         }
@@ -196,4 +201,18 @@ function deleteToken($token) {
 
     $sql = "DELETE FROM forgotpw WHERE token = '".$token."'";
     $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
+}
+
+function isAdmin($id) {
+    global $connection;
+
+    $sql = "SELECT level FROM users_web WHERE id_user = ".$id;
+    $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
+    if (mysqli_num_rows($result) == 1) {
+        $record = mysqli_fetch_array($result);
+        return $record["level"] == 2;
+    }
+    else {
+        return false;
+    }
 }

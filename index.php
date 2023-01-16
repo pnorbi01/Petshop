@@ -1,10 +1,11 @@
 <?php 
 session_start();
-require_once 'register/functions_def.php';
 require_once('register/config.php');
+require_once 'register/functions_def.php';
 require_once 'register/db_config.php';
 require_once('assets/php/header.php');
-if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
+
+if (!isAuthenticated()) {   
     require_once('assets/php/nav-guest.php');
 }
 else {

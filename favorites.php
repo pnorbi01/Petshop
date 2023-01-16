@@ -3,8 +3,11 @@ session_start();
 require_once('assets/php/header.php');
 require_once('assets/php/nav.php');
 require_once('config/db.php');
-if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
-    header("Location: index.php");
+require_once('register/config.php');
+require_once('register/functions_def.php');
+
+if (!isAuthenticated()) {
+    redirection(SITE. "login.php");
 }
 ?>
 
@@ -29,7 +32,7 @@ if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_S
                     <input type="text" hidden value="<?= $row["id"] ?>" name="favourite">
                     <input type="text" hidden value="<?= $_SERVER["REQUEST_URI"] ?>" name="url">
                     <button name="fav"><i class="fas fa-heart"
-                        style="font-size: 20px; color: #0355C0;"></i></button>
+                        style="font-size: 20px; color: #04AA6D;"></i></button>
                         </form>
                     <?php
                     }
@@ -67,7 +70,7 @@ if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_S
                 <div class="close1" onclick="closeModal(event)">+</div>
             </div>
         </div>
-        <script src="assets/js/main.js"></script>
+        <script src="assets/js/modal.js"></script>
         <?php
                 }
             }

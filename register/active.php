@@ -1,28 +1,30 @@
 <?php
 
-require "config.php";
-require "db_config.php";
-require "functions_def.php";
-
-$code = "";
+require_once("assets/config/db_config.php");
+require_once("assets/config/config.php");
 
 if (isset($_GET['token'])){
     $token = mysqli_real_escape_string($connection, trim($_GET['token']));
 }
     
 if (!empty($token) AND strlen($token) === 40) {
+    global $dsn, $pdoOptions;
+    $pdo = connectDatabase($dsn, $pdoOptions);
+
     $sql = "UPDATE users_web SET active='1', token='', registration_expires=''
             WHERE  binary token = '$token' AND registration_expires>now()";
 
-    $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':token', $token, PDO::PARAM_STR);
+    $query->execute();
 
-    if (mysqli_affected_rows($connection) > 0) {
-       redirection('../login.php?r=6');
+    if ($query->rowCount() > 0) {
+       redirection('login.php?r=6');
     }
     else {
-        redirection('../login.php?r=11');
+        redirection('login.php?r=11');
     }
 }
 else {
-    redirection('../login.php?r=0');
+    redirection('login.php?r=0');
 }

@@ -33,6 +33,25 @@ else {
                     <input type="text" name="userId" hidden value="<?= $userId ?>" />
 
                     <input type="submit" value="Jelszó megváltoztatása" name="resetPassSubmit" id="resetPassSubmit">
+                    <?php
+
+            $f = 0;
+
+            if (isset($_GET["f"]) and is_numeric($_GET['f'])) {
+                $f = (int)$_GET["f"];
+
+                if (array_key_exists($f, $messages)) {
+                    echo '
+                    <div class="alert" role="alert">
+                        '.$messages[$f].'
+                        <span class="closeAlert" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </span>
+                    </div>
+                    ';
+                }
+            }
+            ?>
                 </form>
             </div>
         </div>

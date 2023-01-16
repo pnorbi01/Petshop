@@ -791,7 +791,7 @@ body {
     height: 80%;
     width: 40%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-width: 1px;
@@ -799,6 +799,17 @@ body {
     border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0)) 1 100%;
     margin-right: 15px;
     border-left: hidden;
+}
+
+.user-contact {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.user-contact a {
+    margin-left: 5px;
+    text-decoration: none;
+    color: #04AA6D;
 }
 
 .rightSide {
@@ -811,6 +822,7 @@ body {
     text-align: left;
 }
 
+
 .rightSide span {
     margin-bottom: 10px;
     margin-left: 10px;
@@ -818,7 +830,7 @@ body {
 }
 
 .modalTitle {
-    color:#0355C0;
+    color:#04AA6D;
     font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
@@ -1349,7 +1361,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: #0355C0;
+    color: #04AA6D;
 }
 
 #edit-profile-container {
@@ -1597,7 +1609,7 @@ body {
     height: 100px;
 }
 
-#deletePet, #addPet {
+#deletePet, #addPet, #disPet {
     padding: 5px 10px;
     border: 1px solid #000;
     font-weight: bold;
@@ -1605,33 +1617,25 @@ body {
     transition: background-color 1s ease-out 100ms
 }
 
-#deletePet:hover, #addPet:hover {
+#deletePet:hover, #addPet:hover, #disPet:hover {
     color: #FFF;
     border: 1px solid #000;
     cursor: pointer;
     transition: background-color 1s ease-out 100ms;
 }
 
-#deletePet {
+#deletePet, #disPet, #takeAdmin {
     background-color: #CF2608;
 }
 
-#addPet {
-    background-color: #37C70C;
-}
-
-#takeAdmin {
-    background-color: #CF2608;
-}
-
-#giveAdmin {
+#addPet, #giveAdmin {
     background-color: #37C70C;
 }
 
 /* AD POST */
 
 #adding-new_pet h3 {
-    color: #0355C0;
+    color: #04AA6D;
     display: flex;
     flex-direction: column;
     justify-content: center;

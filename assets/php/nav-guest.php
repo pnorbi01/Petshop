@@ -25,7 +25,7 @@
     <img src="assets/img/downloading.gif">
 </div>
 
-<script src="register/js/script.js"></script>
+<script src="assets/js/script.js"></script>
 
 <style>
 nav {

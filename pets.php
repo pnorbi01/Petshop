@@ -2,13 +2,14 @@
 session_start();
 require_once('assets/php/header.php');
 require_once('config/db.php');
-if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
+require_once('register/config.php');
+require_once('register/functions_def.php');
+
+if (!isAuthenticated()) {
     require_once('assets/php/nav-guest.php');
-    $loggedin = false;
 }
 else {
     require_once('assets/php/nav.php');
-    $loggedin = true;
 }
 
 $animalId = $_GET["animalId"];
@@ -17,7 +18,7 @@ $sql = "SELECT * FROM species where id = ".$specieId;
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
-if($loggedin) {
+if(isAuthenticated()) {
     $favoritesResult = $conn->query("SELECT pet_id FROM favourites WHERE user_id = ".$_SESSION["id_user"]);
     $ids_array = [];
     while($row = $favoritesResult->fetch_assoc())
@@ -30,7 +31,7 @@ if($loggedin) {
 <div class="card">
     <div class="card-container">
         <?php
-		$sql = "SELECT pets.id, species.name as specie, pets.description, pets.image, pets.name, pets.gender, pets.age, pets.adopted, pets.active from pets, species where pets.specieId = ".$specieId." and species.id = pets.specieId and active = 1";
+		$sql = "SELECT pets.id, species.name as specie, pets.description, pets.image, pets.name, pets.gender, pets.age, pets.adopted, pets.active, pets.whose from pets, species where pets.specieId = ".$specieId." and species.id = pets.specieId and active = 1";
 		$result = $conn->query($sql);
 		if($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
@@ -45,20 +46,20 @@ if($loggedin) {
                     ?>
             <button type="button" onclick="openModal(<?= $row['id'] ?>)" class="infoButton">Részletek</button>
                 <?php 
-                    if($loggedin && in_array($row["id"], $ids_array)) {
+                    if(isAuthenticated() && in_array($row["id"], $ids_array)) {
                 ?>
                 <form method="post" action="action/unfav-action.php">
                     <input type="text" hidden value="<?= $row["id"] ?>" name="favourite">
                     <input type="text" hidden value="<?= $_SERVER["REQUEST_URI"] ?>" name="url">
                     <button name="fav"><i class="fas fa-heart"
-                        style="font-size: 20px; color: #0355C0;"></i></button>
+                        style="font-size: 20px; color: #04AA6D;"></i></button>
                         </form>
-                        <?php } else if ($loggedin) { ?>
+                        <?php } else if (isAuthenticated()) { ?>
                             <form method="post" action="action/fav-action.php">
                     <input type="text" hidden value="<?= $row["id"] ?>" name="favourite">
                     <input type="text" hidden value="<?= $_SERVER["REQUEST_URI"] ?>" name="url">
                     <button name="fav"><i class="fas fa-heart"
-                        style="font-size: 20px; color: red;"></i></button>
+                        style="font-size: 20px; color: #F00;"></i></button>
                         </form>
                         <?php }
                     
@@ -91,7 +92,7 @@ if($loggedin) {
                     <span><?= $row["description"] ?></span>
                     <div class="modalButton">
                         <?php 
-                        if($loggedin) { ?>
+                        if(isAuthenticated()) { ?>
                             <a href="adopt.php?animalId=<?= $animalId ?>&petId=<?= $row["id"] ?>"><button type="submit"
                                     value="Submit" class="adoptButton">Örökbefogadás</button></a>
                         <?php } else { ?>
@@ -104,7 +105,7 @@ if($loggedin) {
                 <div class="close1" onclick="closeModal(event)">+</div>
             </div>
         </div>
-        <script src="assets/js/main.js"></script>
+        <script src="assets/js/modal.js"></script>
         <?php
                 }
             /*else { 

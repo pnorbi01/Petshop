@@ -1,7 +1,16 @@
 <?php 
+session_start();
 require_once('assets/php/header.php');
 require_once('register/config.php');
-require_once('assets/php/nav-guest.php');
+require_once('register/functions_def.php');
+
+if (!isAuthenticated()) {
+    require_once('assets/php/nav-guest.php');
+}
+else {
+    redirection(SITE. "index.php");
+    require_once('assets/php/nav.php');
+}
 ?>
 <div id="log-container">
     <div id="sign-up">

@@ -1,16 +1,11 @@
 <?php
 session_start();
 require_once('config/db.php');
+require_once('register/config.php');
+require_once('register/functions_def.php');
 
-
-if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
-    header("Location: login.php");
-}
-else {
-    $res = $conn->query("SELECT level FROM users_web WHERE id_user=".$_SESSION['id_user'])->fetch_assoc();
-    if($res["level"] != 2) {
-        header("Location: index.php");
-    }
+if (!isAuthenticated() || !isAdmin($_SESSION['id_user'])) {
+    redirection(SITE."index.php");
 }
 
 require_once('assets/php/header.php');
@@ -66,7 +61,7 @@ $result1 = $conn->query($sql1);
             </td>
             <?php
             }
-            if($row["active"] == 1) {
+            if($row["active"] == 1 && $row["username"] != $_SESSION["username"]) {
             ?>
             <td>
                 <form method="post" action="action/ban-user-action.php">
@@ -81,7 +76,9 @@ $result1 = $conn->query($sql1);
                 <span>Nincs aktiválva</span>
             </td>
             <?php
-            } else { ?>
+            } else if($row["username"] == $_SESSION["username"]) { ?>
+            <td><span>Magadat nem lehet bannolni</span></td>    
+            <?php } else { ?>
             <td>
                 <form method="post" action="action/unban-user-action.php">
                     <input type="text" hidden value="<?= $row["id_user"] ?>" name="unbanUser">
@@ -135,7 +132,7 @@ $result1 = $conn->query($sql1);
                 </form>
             </td>
             <td>
-                <form method="post" action="action/add-pet-action.php">
+                <form method="post" action="action/allow-pet-action.php">
                     <input type="text" hidden value="<?= $row["id"] ?>" name="allowPet">
                     <button type="submit" name="addPet" value="add" id="addPet">ENGEDÉLYEZÉS</button>
                 </form>
@@ -150,9 +147,9 @@ $result1 = $conn->query($sql1);
                 </form>
             </td>
             <td>
-                <form method="post" action="action/add-pet-action.php">
-                    <input type="text" hidden value="<?= $row["id"] ?>" name="allowPet">
-                    <button type="submit" name="addPet" value="add" id="addPetDis" disabled>ENGEDÉLYEZÉS</button>
+                <form method="post" action="action/disallow-pet-action.php">
+                    <input type="text" hidden value="<?= $row["id"] ?>" name="disallowPet">
+                    <button type="submit" name="disPet" value="dis" id="disPet">VISSZAVONÁS</button>
                 </form>
             </td>
             <?php

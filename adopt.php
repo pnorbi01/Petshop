@@ -1,8 +1,10 @@
 <?php 
 session_start();
+require_once('register/config.php');
+require_once('register/functions_def.php');
 
-if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_SESSION['id_user'])) {
-    header("Location: login.php");
+if (!isAuthenticated()) {
+    redirection(SITE. "login.php");
 }
 
 require_once('assets/php/header.php');
